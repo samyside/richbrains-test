@@ -1,0 +1,22 @@
+{
+    "name": "samyside/richbrains-test",
+    "description": "Тестовое задание RichBrains с использованием ООП",
+    "type": "project",
+    "require": {
+        "php": "^8.2",
+        "phpunit/php-timer": "^7.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Samyside\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vlad Babenko"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
