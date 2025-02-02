@@ -6,32 +6,25 @@ use Samyside\Shapes\Square;
 use Samyside\Shapes\Circle;
 use Samyside\Exceptions\ShapeNotFoundException;
 
-// Определяем цвета
-$red      = "\033[31m";
-$green    = "\033[32m";
-$yellow   = "\033[33m";
-$blue     = "\033[34m";
-$magenta  = "\033[35m";
-$cyan     = "\033[36m";
-$color    = "\033[0m"; // Сброс цвета
-
 /**
- * Тестирование
+ * Отлавливает исключение, в случаях когда имя фигуры не зарегистрировано
  */
-
-echo "{$green}Start...{$color}\n";
+spl_autoload_register(function ($shapeName) {
+  throw new ShapeNotFoundException("Exception: shape '{$shapeName} not found\n");
+});
 
 /**
+ * Выводит сообщение, в котором каждая строчка состоит из имени предполагаемой
+ * фигуры и количества углов оной, если имя неизвестно - "$shapeName - not define".
  * 
+ * @param string ...$shapesName  Неограниченное кол-во фигур, через запятую
+ * @return string
  */
 function getShapeCornersCount(string ...$shapesName): string {
   $result = '';
   foreach ($shapesName as $shapeName) {
     try {
       $classname = "Samyside\\Shapes\\" . ucfirst(strtolower($shapeName));
-      if (!class_exists($classname)) {
-        throw new ShapeNotFoundException("Shape is not defined", 1);
-      }
       $shape = new $classname();
       $corners = $shape->getCornersCount();
       $result .= "{$shapeName} - {$corners}\n";
@@ -42,6 +35,8 @@ function getShapeCornersCount(string ...$shapesName): string {
   return $result;
 }
 
-echo getShapeCornersCount('square', 'circle', 'triangle', 'ASDFqwer');
 
-echo "{$red}Finish.{$color}\n";
+/**
+ * Тестирование
+ */
+echo getShapeCornersCount('square', 'circle', 'triangle', 'ASDFqwer');
