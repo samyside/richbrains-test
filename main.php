@@ -1,6 +1,6 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require_once __DIR__ . 'vendor/autoload.php';
 
 use Samyside\Shapes\Square;
 use Samyside\Shapes\Circle;
@@ -34,9 +34,3 @@ function getShapeCornersCount(string ...$shapesName): string {
   }
   return $result;
 }
-
-
-/**
- * Тестирование
- */
-echo getShapeCornersCount('square', 'circle', 'triangle', 'ASDFqwer');
